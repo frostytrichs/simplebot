@@ -1,0 +1,14 @@
+[Unit]
+Description=SimpleBot YouTube to Lemmy Bot
+After=network.target
+
+[Service]
+User=yourusername
+WorkingDirectory=/path/to/simplebot
+ExecStart=/path/to/simplebot/venv/bin/python main.py --mode continuous
+Restart=on-failure
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
