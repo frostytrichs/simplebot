@@ -21,7 +21,7 @@ A Python bot that filters and posts YouTube videos to a Lemmy community based on
 
 1. Clone this repository:
    ```
-   git clone https://github.com/frostytrichs/simplebot/initial-implementation.git
+   git clone https://github.com/frostytrichs/simplebot/feature/initial-implementation.git
    cd simplebot
    ```
 
