@@ -1,0 +1,29 @@
+# YouTube Bot Configuration
+
+# YouTube API settings
+youtube:
+  api_key: "YOUR_YOUTUBE_API_KEY"
+  quota_limit_per_day: 10000  # Default YouTube API quota limit
+  check_interval_minutes: 60  # How often to check for new videos
+  lookback_hours: 24  # How far back to look for videos
+
+# Lemmy settings
+lemmy:
+  instance_url: "https://walledgarden.xyz"  # Your Lemmy instance URL
+  username: "BlueFlagBog"
+  password: "YOUR_PASSWORD"
+  community: "racingtest"  # Community name to post to
+  check_duplicate_days: 3  # How many days back to check for duplicates
+
+# Scoring settings
+scoring:
+  threshold: 40  # Minimum score required to post a video
+  top_keyword_points: 25  # Points for each top keyword match
+  other_keyword_points: 5  # Points for each other keyword match
+  negative_keyword_points: -15  # Points for each negative keyword match
+  auto_reject: true  # Whether to auto-reject videos with auto_reject keywords
+
+# Bot operation
+operation:
+  mode: "continuous"  # "continuous" or "single_run"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
