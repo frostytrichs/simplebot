@@ -9,15 +9,15 @@ youtube:
 
 # Lemmy settings
 lemmy:
-  instance_url: "https://lemmy.example.com"  # Your Lemmy instance URL
-  username: "YOUR_USERNAME"
+  instance_url: "https://walledgarden.xyz"  # Your Lemmy instance URL
+  username: "BlueFlagBog"
   password: "YOUR_PASSWORD"
-  community: "YOUR_COMMUNITY"  # Community name to post to
-  check_duplicate_days: 7  # How many days back to check for duplicates
+  community: "racingtest"  # Community name to post to
+  check_duplicate_days: 3  # How many days back to check for duplicates
 
 # Scoring settings
 scoring:
-  threshold: 25  # Minimum score required to post a video
+  threshold: 40  # Minimum score required to post a video
   top_keyword_points: 25  # Points for each top keyword match
   other_keyword_points: 5  # Points for each other keyword match
   negative_keyword_points: -15  # Points for each negative keyword match
