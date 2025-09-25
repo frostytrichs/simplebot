@@ -30,6 +30,10 @@ This guide will help you install and configure SimpleBot, a YouTube to Lemmy bot
 
 3. **Configure the bot**
 
+   You have two options for configuration:
+
+   ### Option 1: Using .env file (Recommended for sensitive information)
+   
    Edit the `.env` file with your credentials:
 
    ```
@@ -40,9 +44,28 @@ This guide will help you install and configure SimpleBot, a YouTube to Lemmy bot
    LEMMY_COMMUNITY=your_community_name_here
    ```
 
-4. **Edit the configuration files**
+   ### Option 2: Using config.yaml
+   
+   Edit `config/config.yaml` for all other settings:
+   
+   ```yaml
+   # YouTube API settings
+   youtube:
+     # This will be overridden by YOUTUBE_API_KEY in .env if present
+     api_key: "YOUR_YOUTUBE_API_KEY"
+     quota_limit_per_day: 10000
+     check_interval_minutes: 60
+     lookback_hours: 24
+   
+   # Other settings...
+   ```
 
-   - `config/config.yaml`: Main configuration file
+   > **Note:** Environment variables in `.env` take precedence over values in `config.yaml`. 
+   > It's recommended to put sensitive information like API keys and passwords in the `.env` file
+   > and other configuration in the `config.yaml` file.
+
+4. **Edit the channel and keyword files**
+
    - `config/channels.json`: YouTube channels to monitor
    - `config/keywords.json`: Keywords for filtering videos
 

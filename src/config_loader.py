@@ -30,7 +30,7 @@ class ConfigLoader:
         
     def load_main_config(self) -> Dict[str, Any]:
         """
-        Load the main configuration file
+        Load the main configuration file and override with environment variables
         
         Returns:
             Dict containing configuration settings
@@ -39,10 +39,62 @@ class ConfigLoader:
         try:
             with open(config_path, 'r') as file:
                 self.config = yaml.safe_load(file)
+                
+            # Override with environment variables if they exist
+            # YouTube settings
+            if os.environ.get('YOUTUBE_API_KEY'):
+                if 'youtube' not in self.config:
+                    self.config['youtube'] = {}
+                self.config['youtube']['api_key'] = os.environ.get('YOUTUBE_API_KEY')
+                
+            # Lemmy settings
+            if 'lemmy' not in self.config:
+                self.config['lemmy'] = {}
+                
+            if os.environ.get('LEMMY_INSTANCE'):
+                self.config['lemmy']['instance_url'] = os.environ.get('LEMMY_INSTANCE')
+                
+            if os.environ.get('LEMMY_USERNAME'):
+                self.config['lemmy']['username'] = os.environ.get('LEMMY_USERNAME')
+                
+            if os.environ.get('LEMMY_PASSWORD'):
+                self.config['lemmy']['password'] = os.environ.get('LEMMY_PASSWORD')
+                
+            if os.environ.get('LEMMY_COMMUNITY'):
+                self.config['lemmy']['community'] = os.environ.get('LEMMY_COMMUNITY')
+                
             return self.config
         except Exception as e:
             print(f"Error loading main configuration: {e}")
-            return {}
+            
+            # Create minimal config from environment variables if config file failed to load
+            self.config = {
+                'youtube': {
+                    'api_key': os.environ.get('YOUTUBE_API_KEY', ''),
+                    'quota_limit_per_day': 10000,
+                    'check_interval_minutes': 60,
+                    'lookback_hours': 24
+                },
+                'lemmy': {
+                    'instance_url': os.environ.get('LEMMY_INSTANCE', ''),
+                    'username': os.environ.get('LEMMY_USERNAME', ''),
+                    'password': os.environ.get('LEMMY_PASSWORD', ''),
+                    'community': os.environ.get('LEMMY_COMMUNITY', ''),
+                    'check_duplicate_days': 7
+                },
+                'scoring': {
+                    'threshold': 25,
+                    'top_keyword_points': 25,
+                    'other_keyword_points': 5,
+                    'negative_keyword_points': -15,
+                    'auto_reject': True
+                },
+                'operation': {
+                    'mode': 'single_run',
+                    'log_level': 'INFO'
+                }
+            }
+            return self.config
             
     def load_channels(self) -> List[Dict[str, Any]]:
         """
