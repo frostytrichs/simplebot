@@ -1,0 +1,32 @@
+# YouTube Bot Configuration
+
+# YouTube API settings
+youtube:
+  # This value can be overridden by the YOUTUBE_API_KEY environment variable
+  api_key: "YOUR_YOUTUBE_API_KEY"
+  quota_limit_per_day: 10000  # Default YouTube API quota limit
+  check_interval_minutes: 60  # How often to check for new videos
+  lookback_hours: 24  # How far back to look for videos
+
+# Lemmy settings
+lemmy:
+  # These values can be overridden by environment variables:
+  # LEMMY_INSTANCE, LEMMY_USERNAME, LEMMY_PASSWORD, LEMMY_COMMUNITY
+  instance_url: "https://lemmy.example.com"  # Your Lemmy instance URL
+  username: "YOUR_USERNAME"
+  password: "YOUR_PASSWORD"
+  community: "YOUR_COMMUNITY"  # Community name to post to
+  check_duplicate_days: 7  # How many days back to check for duplicates
+
+# Scoring settings
+scoring:
+  threshold: 25  # Minimum score required to post a video
+  top_keyword_points: 25  # Points for each top keyword match
+  other_keyword_points: 5  # Points for each other keyword match
+  negative_keyword_points: -15  # Points for each negative keyword match
+  auto_reject: true  # Whether to auto-reject videos with auto_reject keywords
+
+# Bot operation
+operation:
+  mode: "continuous"  # "continuous" or "single_run"
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
