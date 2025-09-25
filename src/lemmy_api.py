@@ -1,6 +1,7 @@
 import datetime
 from typing import List, Dict, Any, Optional
 from pythorhead import Lemmy
+from pythorhead.types import SearchType, SearchOption
 
 class LemmyAPI:
     """
@@ -48,14 +49,12 @@ class LemmyAPI:
             Community ID or None if not found
         """
         try:
-            response = self.lemmy.discover_community(community_name)
-            communities = response.get('communities', [])
-            
-            for community in communities:
-                if community['community']['name'].lower() == community_name.lower():
-                    self.community_id = community['community']['id']
-                    return self.community_id
-                    
+            # Use the discover_community method which handles searching
+            community_id = self.lemmy.discover_community(community_name)
+            if community_id:
+                self.community_id = community_id
+                return community_id
+                
             print(f"Community '{community_name}' not found")
             return None
             
